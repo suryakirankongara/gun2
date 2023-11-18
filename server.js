@@ -1,12 +1,9 @@
-// server.js
-const express = require('express');
-const app = express();
+const Gun = require('gun');
+const http = require('http');
 
-// Serve static files from the "public" directory
-app.use(express.static('public'));
+const server = http.createServer();
+const gun = Gun({ web: server });
 
-// Start the server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+server.listen(process.env.PORT || 8765, () => {
+  console.log(`Gun.js server is running on port ${server.address().port}`);
 });
